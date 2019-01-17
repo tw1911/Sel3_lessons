@@ -47,4 +47,8 @@ public class AdminHelper {
     public void checkPageHeader(){
         wait.until(driver -> driver.findElement(By.cssSelector("h1")));
     }
+
+    public void clickMenuItem(String itemName){
+        findItemByName(itemName).click();
+    }
 }
