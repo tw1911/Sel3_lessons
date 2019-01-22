@@ -1,5 +1,8 @@
 package ru.tw1911.sel3_lessons;
 
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -22,7 +25,6 @@ public class CountriesPageTests extends BasicTest{
                 .stream()
                 .map(row -> row.findElement(By.cssSelector("td:nth-child(5) > a")).getText())
                 .collect(Collectors.toList());
-        System.out.println(countryList.size());
         List<String> sortedCountryList = new ArrayList<>(countryList);
         Collections.sort(sortedCountryList);
 
@@ -38,11 +40,28 @@ public class CountriesPageTests extends BasicTest{
                 .map(link -> link.getAttribute("href"))
                 .collect(Collectors.toList());
 
+        for(String link:linksToCountriesWithZones){
+            driver.get(link);
+            List<String> zones = driver.findElement(By.className("dataTable"))
+                    .findElements(By.xpath(".//tr[.//i]/td[3]"))
+                    .stream()
+                    .map(element ->element.getText())
+                    .collect(Collectors.toList());
 
-        linksToCountriesWithZones.forEach(link -> System.out.println(link));
+            List<String> zonesSorted = new ArrayList<>(zones);
+            Collections.sort(zonesSorted);
+            assertThat(zones,is(zonesSorted));
+
+        }
+    }
+
+    @Test
+    public void CheckZonesOrder(){
+
     }
 
     private List<WebElement> getCountryRows(){
         return driver.findElements(By.cssSelector("tr.row"));
     }
+
 }
