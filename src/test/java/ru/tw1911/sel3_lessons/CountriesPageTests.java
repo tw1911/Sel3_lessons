@@ -25,10 +25,8 @@ public class CountriesPageTests extends BasicTest{
                 .stream()
                 .map(row -> row.findElement(By.cssSelector("td:nth-child(5) > a")).getText())
                 .collect(Collectors.toList());
-        List<String> sortedCountryList = new ArrayList<>(countryList);
-        Collections.sort(sortedCountryList);
 
-        assertThat(countryList,is(sortedCountryList));
+        assertThat(countryList,isInAscendingOrdering());
     }
 
     @Test
@@ -48,20 +46,55 @@ public class CountriesPageTests extends BasicTest{
                     .map(element ->element.getText())
                     .collect(Collectors.toList());
 
-            List<String> zonesSorted = new ArrayList<>(zones);
-            Collections.sort(zonesSorted);
-            assertThat(zones,is(zonesSorted));
+            assertThat(zones,isInAscendingOrdering());
 
         }
     }
 
     @Test
     public void CheckZonesOrder(){
+        adminHelper.login("admin","admin");
+        adminHelper.clickMenuItem("Geo Zones");
+        List<String> linksToCountriesWithZones = driver.findElement(By.className("dataTable"))
+                .findElements(By.cssSelector("td:nth-child(3) > a"))
+                .stream()
+                .map(link -> link.getAttribute("href"))
+                .collect(Collectors.toList());
+        linksToCountriesWithZones.forEach(zone -> System.out.println(zone));
 
+        for (String link:linksToCountriesWithZones){
+            driver.get(link);
+            List<String> zones = driver
+                    .findElements(By.cssSelector("table.dataTable td:nth-child(3) option[selected='selected']"))
+                    .stream().map(selected ->selected.getText()).collect(Collectors.toList());
+            zones.forEach(z-> System.out.println(z));
+            assertThat(zones,isInAscendingOrdering());
+        }
     }
 
     private List<WebElement> getCountryRows(){
         return driver.findElements(By.cssSelector("tr.row"));
+    }
+
+    private Matcher<? super List<String>> isInAscendingOrdering()
+    {
+        return new TypeSafeMatcher<List<String>>()
+        {
+            @Override
+            public void describeTo (Description description)
+            {
+                description.appendText("describe the error has you like more");
+            }
+
+            @Override
+            protected boolean matchesSafely (List<String> items)
+            {
+                List<String> sorted = new ArrayList<>(items);
+                Collections.sort(sorted);
+                assertThat(items,is(sorted));
+                return true;
+            }
+        };
     }
 
 }
