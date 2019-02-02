@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.tw1911.sel3_lessons.helpers.AdminHelper;
 
@@ -22,7 +23,6 @@ public abstract class BasicTest {
     @After
     public void tearDown(){
         driver.close();
-        driver.quit();
         driver=null;
     }
 }
