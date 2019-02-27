@@ -8,4 +8,6 @@ import lombok.experimental.Accessors;
 public class Address {
     private String address;
     private String postcode;
+    private String country;
+    private String city;
 }
