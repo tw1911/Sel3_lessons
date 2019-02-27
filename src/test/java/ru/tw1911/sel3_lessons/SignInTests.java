@@ -38,7 +38,8 @@ public class SignInTests extends BasicTest {
         driver.findElement(By.xpath("//a[text()='New customers click here']")).click();
         fillSignInForm(user);
         logOut();
-
+        userLogin(user);
+        logOut();
     }
 
     private void fillSignInForm(User user){
@@ -70,5 +71,11 @@ public class SignInTests extends BasicTest {
 
     private void logOut(){
         driver.findElement(By.xpath("//a[text()='Logout']")).click();
+    }
+
+    private void userLogin(User user){
+        driver.findElement(By.cssSelector("input[name='email']")).sendKeys(user.email());
+        driver.findElement(By.cssSelector("input[name='password']")).sendKeys("password");
+        driver.findElement(By.cssSelector("button[name='login']")).click();
     }
 }
