@@ -2,17 +2,12 @@ package ru.tw1911.sel3_lessons;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-import ru.tw1911.sel3_lessons.BasicTest;
 import ru.tw1911.sel3_lessons.config.TestSystemConfig;
 import ru.tw1911.sel3_lessons.entity.Address;
 import ru.tw1911.sel3_lessons.entity.User;
 
-import java.util.Random;
 
 public class SignInTests extends BasicTest {
 
