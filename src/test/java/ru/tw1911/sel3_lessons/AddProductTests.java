@@ -3,6 +3,7 @@ package ru.tw1911.sel3_lessons;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.Select;
 
 public class AddProductTests extends BasicTest{
@@ -25,5 +26,6 @@ public class AddProductTests extends BasicTest{
         manufactorer.selectByVisibleText("ACME Corp.");
         driver.findElement(By.name("keywords")).sendKeys("put in toy");
         driver.findElement(By.name("short_description[en]")).sendKeys("put in toy to play with bear and yellow duck");
+        driver.findElement(By.className("trumbowyg-editor")).sendKeys("put in toy to play with bear and yellow duck"+Keys.ENTER+"Logn description");
     }
 }
