@@ -25,7 +25,7 @@ public class AddProductTests extends BasicTest{
         driver.findElement(By.name("quantity")).sendKeys("5");
         String filepath = System.getProperty("user.dir")+"/src/test/resources/PutIn.jpg";
         driver.findElement(By.cssSelector("input[type='file']")).sendKeys(filepath);
-        driver.findElement(By.xpath("//div[@class='tabs']//a[text()='Information']")).click();
+        openTab("Information");
 
         Select manufactorer = new Select(driver.findElement(By.name("manufacturer_id")));
         manufactorer.selectByVisibleText("ACME Corp.");
@@ -35,8 +35,7 @@ public class AddProductTests extends BasicTest{
         driver.findElement(By.name("head_title[en]")).sendKeys("PutIn yellow duck");
         driver.findElement(By.name("meta_description[en]")).sendKeys("putIn yellow duck");
 
-        driver.findElement(By.xpath("//div[@class='tabs']//a[text()='Prices']")).click();
-
+        openTab("Prices");
         WebElement priceField = driver.findElement(By.name("purchase_price"));
         priceField.clear();
         priceField.sendKeys("100");
@@ -49,5 +48,9 @@ public class AddProductTests extends BasicTest{
         driver.findElement(By.name("save")).click();
         WebElement dataTable = driver.findElement(By.className("dataTable"));
         dataTable.findElement(By.xpath(String.format(".//tr/td/a[text()='%s']",productName))).isDisplayed();
+    }
+
+    private void openTab(String tabName){
+        driver.findElement(By.xpath(String.format("//div[@class='tabs']//a[text()='%s']",tabName))).click();
     }
 }
