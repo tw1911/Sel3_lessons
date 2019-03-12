@@ -16,5 +16,14 @@ public class CartTests extends BasicTest {
     @Test
     public void addProductToCartTest(){
         driver.findElement(By.cssSelector("div#box-most-popular li.product:first-of-type")).click();
+        int oldCount = Integer.parseInt(driver.findElement(By.cssSelector("div#cart span.quantity")).getText());
+        System.out.println(oldCount);
+        if (isElementPresent(By.cssSelector("div#box-product select[name='options[Size]']"))){
+            System.out.println("Yellow duck!");
+        }
+    }
+
+    private boolean isElementPresent(By locator){
+        return driver.findElements(locator).size() > 0;
     }
 }
