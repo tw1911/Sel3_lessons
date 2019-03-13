@@ -33,8 +33,7 @@ public class CartTests extends BasicTest {
         driver.findElement(By.xpath("//a[contains(text(),'Checkout')]")).click();
         while (isElementPresent(By.cssSelector(itemLocator))){
             int tableSize = driver.findElements(By.cssSelector(itemLocator)).size();
-            WebElement removeButton = driver.findElement(By.cssSelector("button[name='remove_cart_item']"));
-            removeButton.click();
+            driver.findElement(By.cssSelector("button[name='remove_cart_item']")).click();
             wait.until(webDriver -> {
                 List<WebElement> rows = webDriver.findElements(By.cssSelector(itemLocator));
                 return rows.size() == tableSize-1;
@@ -49,7 +48,6 @@ public class CartTests extends BasicTest {
      private void addProductToCart(){
          driver.findElement(By.cssSelector("div#box-most-popular li.product:first-of-type")).click();
          int oldCount = Integer.parseInt(driver.findElement(By.cssSelector("div#cart span.quantity")).getText());
-         System.out.println(oldCount);
          if (isElementPresent(By.cssSelector("div#box-product select[name='options[Size]']"))){
              new Select(driver.findElement(By.cssSelector("div#box-product select[name='options[Size]']"))).selectByVisibleText("Small");
          }
