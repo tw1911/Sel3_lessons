@@ -29,15 +29,9 @@ public class CartTests extends BasicTest {
             addProductToCart();
             driver.get(TestSystemConfig.baseUrl);
         }
-        String itemLocator = ".dataTable tr:not([class]) td.item";
         driver.findElement(By.xpath("//a[contains(text(),'Checkout')]")).click();
-        while (isElementPresent(By.cssSelector(itemLocator))){
-            int tableSize = driver.findElements(By.cssSelector(itemLocator)).size();
-            driver.findElement(By.cssSelector("button[name='remove_cart_item']")).click();
-            wait.until(webDriver -> {
-                List<WebElement> rows = webDriver.findElements(By.cssSelector(itemLocator));
-                return rows.size() == tableSize-1;
-            });
+        while (cartItems().size()>0){
+            removeCurrentItem();
         }
     }
 
@@ -53,5 +47,19 @@ public class CartTests extends BasicTest {
          }
          driver.findElement(By.cssSelector("button[name='add_cart_product']")).click();
          wait.until(ExpectedConditions.textToBe(By.cssSelector("div#cart span.quantity"),String.valueOf(oldCount+1)));
+     }
+
+     private void removeCurrentItem(){
+         String itemLocator = ".dataTable tr:not([class]) td.item";
+         int tableSize = driver.findElements(By.cssSelector(itemLocator)).size();
+         driver.findElement(By.cssSelector("button[name='remove_cart_item']")).click();
+         wait.until(webDriver -> {
+             List<WebElement> rows = webDriver.findElements(By.cssSelector(itemLocator));
+             return rows.size() == tableSize-1;
+         });
+     }
+
+     private List<WebElement> cartItems(){
+        return driver.findElements(By.cssSelector(".dataTable tr:not([class]) td.item"));
      }
 }
