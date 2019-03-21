@@ -14,6 +14,9 @@ public class Header {
     @FindBy(css = "div#cart span.quantity")
     WebElement cartCounter;
 
+    @FindBy(xpath = "//a[contains(text(),'Checkout')]")
+    WebElement cartLink;
+
     public Header(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);
@@ -21,5 +24,9 @@ public class Header {
 
     public int getProductInCartCount(){
         return Integer.parseInt(cartCounter.getText());
+    }
+
+    public void openCart() {
+        cartLink.click();
     }
 }

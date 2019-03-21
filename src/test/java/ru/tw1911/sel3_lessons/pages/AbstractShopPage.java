@@ -6,7 +6,7 @@ import ru.tw1911.sel3_lessons.pages.elements.Header;
 
 public class AbstractShopPage {
     WebDriver driver;
-    Header header;
+    public final Header header;
 
     public AbstractShopPage(WebDriver driver){
         this.driver = driver;
@@ -16,4 +16,5 @@ public class AbstractShopPage {
     protected boolean isElementPresent(By locator){
         return driver.findElements(locator).size() > 0;
     }
+
 }
