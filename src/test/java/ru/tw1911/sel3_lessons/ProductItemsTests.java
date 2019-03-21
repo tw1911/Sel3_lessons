@@ -16,7 +16,7 @@ import static org.junit.Assert.assertThat;
 
 public class ProductItemsTests extends BasicTest{
 
-
+/*
     @Before
     public void setUp(){
         super.setUp();
@@ -144,6 +144,6 @@ public class ProductItemsTests extends BasicTest{
                         color.getColor().getRed()>0;
             }
         };
-    }
+    }*/
 
 }

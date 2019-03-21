@@ -6,23 +6,29 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.tw1911.sel3_lessons.app.Application;
 import ru.tw1911.sel3_lessons.helpers.AdminHelper;
+import ru.tw1911.sel3_lessons.helpers.NavigationHelper;
 
 public abstract class BasicTest {
-    protected WebDriver driver;
-    protected WebDriverWait wait;
     protected AdminHelper adminHelper;
+    protected NavigationHelper navigationHelper;
+
+    public static ThreadLocal<Application> tlApp = new ThreadLocal<>();
+    public Application app;
+
 
     @Before
     public void setUp(){
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver,10);
-        adminHelper=new AdminHelper(driver);
-    }
+        if (tlApp.get() != null) {
+            app = tlApp.get();
+            return;
+        }
 
-    @After
-    public void tearDown(){
-        driver.close();
-        driver=null;
+        app = new Application();
+        tlApp.set(app);
+
+        //Runtime.getRuntime().addShutdownHook(
+        //        new Thread(() -> { app.quit(); app = null; }));
     }
 }

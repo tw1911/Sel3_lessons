@@ -14,11 +14,11 @@ public class StickersTest extends BasicTest{
 
     @Test
     public void CheckStickersOnMainPage(){
-        driver.get(TestSystemConfig.baseUrl);
-        List<WebElement> products = driver.findElements(By.className("product"));
-        for (WebElement product: products){
-            List<WebElement> stickers = product.findElements(By.className("sticker"));
-            assertEquals(stickers.size(),1);
-        }
+//        driver.get(TestSystemConfig.baseUrl);
+//        List<WebElement> products = driver.findElements(By.className("product"));
+//        for (WebElement product: products){
+//            List<WebElement> stickers = product.findElements(By.className("sticker"));
+//            assertEquals(stickers.size(),1);
+//        }
     }
 }
