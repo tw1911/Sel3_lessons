@@ -2,6 +2,7 @@ package ru.tw1911.sel3_lessons.app;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import ru.tw1911.sel3_lessons.pages.BasePage;
 import ru.tw1911.sel3_lessons.pages.CartPage;
 import ru.tw1911.sel3_lessons.pages.MainShopPage;
 import ru.tw1911.sel3_lessons.pages.ProductPage;
@@ -9,11 +10,11 @@ import ru.tw1911.sel3_lessons.util.PageGenerator;
 
 public class Application {
     private WebDriver driver;
-    PageGenerator pageGenerator;
+    BasePage page;
 
     public Application() {
         driver = new ChromeDriver();
-        pageGenerator = new PageGenerator(driver);
+        page = new BasePage(driver);
     }
 
     public void quit() {
@@ -21,7 +22,7 @@ public class Application {
     }
 
     public void addProductToCart() {
-        ProductPage product = pageGenerator.GetInstance(MainShopPage.class)
+        ProductPage product = page.getInstance(MainShopPage.class)
                 .open()
                 .openProduct();
         if(product.haveSize()){
@@ -31,10 +32,7 @@ public class Application {
     }
 
     public void clearCart() {
-        CartPage cartPage = this.getInstance(MainShopPage.class)
-                .open()
-                .header.openCart();
-        mainShopPage.header.openCart();
+        CartPage cartPage = page.getInstance(MainShopPage.class).cart();
         while (cartPage.itemsCount()>0){
             cartPage.removeCurrentItem();
         }

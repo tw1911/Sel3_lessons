@@ -3,14 +3,14 @@ package ru.tw1911.sel3_lessons.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public abstract class AbstractPage {
+public class BasePage {
     WebDriver driver;
 
-    public AbstractPage(WebDriver driver){
+    public BasePage(WebDriver driver){
         this.driver=driver;
     }
 
-    public  <TPage extends AbstractPage> TPage getInstance (Class<TPage> pageClass) {
+    public  <TPage extends BasePage> TPage getInstance (Class<TPage> pageClass) {
         try {
             //Initialize the Page with its elements and return it.
             return PageFactory.initElements(driver,  pageClass);

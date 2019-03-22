@@ -3,12 +3,11 @@ package ru.tw1911.sel3_lessons.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class CartPage extends AbstractShopPage {
+public class CartPage extends BaseShopPage {
 
     @FindBy(css = ".dataTable tr:not([class]) td.item")
     List<WebElement> cardItems;
