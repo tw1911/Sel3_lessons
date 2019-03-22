@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import ru.tw1911.sel3_lessons.pages.CartPage;
+import ru.tw1911.sel3_lessons.pages.ProductPage;
 
 public class Header {
     WebDriver driver;

@@ -4,12 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.tw1911.sel3_lessons.pages.elements.Header;
 
-public class AbstractShopPage {
-    WebDriver driver;
+public class AbstractShopPage  extends AbstractPage{
     public final Header header;
 
     public AbstractShopPage(WebDriver driver){
-        this.driver = driver;
+        super(driver);
         this.header = new Header(driver);
     }
 
@@ -17,4 +16,8 @@ public class AbstractShopPage {
         return driver.findElements(locator).size() > 0;
     }
 
+    protected CartPage cart(){
+        header.openCart();
+        return getInstance(CartPage.class);
+    }
 }

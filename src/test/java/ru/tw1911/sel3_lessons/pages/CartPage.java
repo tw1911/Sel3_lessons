@@ -18,7 +18,6 @@ public class CartPage extends AbstractShopPage {
 
     public CartPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver,this);
     }
 
     public void removeCurrentItem(){

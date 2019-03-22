@@ -5,18 +5,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import ru.tw1911.sel3_lessons.pages.CartPage;
 import ru.tw1911.sel3_lessons.pages.MainShopPage;
 import ru.tw1911.sel3_lessons.pages.ProductPage;
+import ru.tw1911.sel3_lessons.util.PageGenerator;
 
 public class Application {
     private WebDriver driver;
-    MainShopPage mainShopPage;
-    ProductPage productPage;
-    CartPage cartPage;
+    PageGenerator pageGenerator;
 
     public Application() {
         driver = new ChromeDriver();
-        mainShopPage = new MainShopPage(driver);
-        productPage = new ProductPage(driver);
-        cartPage = new CartPage(driver);
+        pageGenerator = new PageGenerator(driver);
     }
 
     public void quit() {
@@ -24,19 +21,24 @@ public class Application {
     }
 
     public void addProductToCart() {
-        mainShopPage.open();
-        productPage = mainShopPage.openProduct();
-        if(productPage.haveSize()){
-            productPage.selectSize();
+        ProductPage product = pageGenerator.GetInstance(MainShopPage.class)
+                .open()
+                .openProduct();
+        if(product.haveSize()){
+            product.selectSize();
         }
-        productPage.addToCart();
+        product.addToCart();
     }
 
     public void clearCart() {
-        mainShopPage.open();
+        CartPage cartPage = this.getInstance(MainShopPage.class)
+                .open()
+                .header.openCart();
         mainShopPage.header.openCart();
         while (cartPage.itemsCount()>0){
             cartPage.removeCurrentItem();
         }
     }
+
+
 }

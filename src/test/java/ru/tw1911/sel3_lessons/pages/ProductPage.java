@@ -10,8 +10,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProductPage extends AbstractShopPage{
-    WebDriver driver;
-
     @FindBy(css = "div#box-product select[name='options[Size]']")
     WebElement sizeSelect;
 
@@ -20,8 +18,6 @@ public class ProductPage extends AbstractShopPage{
 
     public ProductPage(WebDriver driver) {
         super(driver);
-        this.driver = driver;
-        PageFactory.initElements(driver,this);
     }
 
     public boolean haveSize() {
